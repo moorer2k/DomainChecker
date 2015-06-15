@@ -72,19 +72,7 @@ Public Class FrmMain
 
             Dim url As String = domain
 
-            'http://viewdns.info/dnsreport/?domain=1ten.com
-
-            'Dim str As String = GetUrl("https://www.easywhois.com/guts.php?domain=" & url & "&mode=whois")
-
             Dim str As String = GetUrl("http://api.statdns.com/" & url & "." & _strTld & "/ns")
-
-            'http://api.statdns.com/statdns.net/ns
-
-            'Dim str As String = GetUrl("http://www.bigbiz.com/bigbiz/whois.pl?DOMAIN=" & url & "&TLD=" & StrTld & "&cmd=Show+my+domain+record")
-
-            'Dim ff As Match = MyRegex2.Match(str)
-
-            'If ff.Success Then
 
             If str.Contains("answer") Then
 
@@ -107,8 +95,6 @@ Public Class FrmMain
                 End If
 
                 Debug.WriteLine(TimeStamp & "Not available - " & url)
-
-                'Debug.WriteLine(timeStamp & "Not available - Expires " & ff.Groups(1).Value & " - " & url)
 
             End If
 
@@ -141,7 +127,7 @@ Public Class FrmMain
         Loop
     End Sub
 
-    Private Function GetUrl(ByVal url As String) As String
+    Private Shared Function GetUrl(ByVal url As String) As String
         Try
 
             Dim wc As New WebClient
@@ -189,7 +175,7 @@ Public Class FrmMain
         End Try
     End Sub
 
-    Private Sub Bgw_Disposed(sender As Object, e As EventArgs) Handles _bgw.Disposed
+    Private Shared Sub Bgw_Disposed(sender As Object, e As EventArgs) Handles _bgw.Disposed
         MsgBox("Dtruly done")
     End Sub
 
@@ -327,7 +313,7 @@ Public Class FrmMain
 
     End Sub
 
-    Private Function DoWork(ByVal keyword As String, Optional ByVal page As Integer = 1) As String
+    Private Shared Function DoWork(ByVal keyword As String, Optional ByVal page As Integer = 1) As String
 
         Dim wc As New WebClient
 
@@ -343,8 +329,6 @@ Public Class FrmMain
 
         If Directory.Exists(_altwordLogs) = False Then Directory.CreateDirectory(_altwordLogs)
         If Directory.Exists(_dnsLogs) = False Then Directory.CreateDirectory(_dnsLogs)
-
-        'StrDic = File.ReadAllLines(Application.StartupPath & "\test.txt")
 
     End Sub
 
